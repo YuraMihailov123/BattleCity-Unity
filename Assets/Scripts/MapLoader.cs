@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class MapLoader : MonoBehaviour
 {
-    public Transform block;
+    Transform block;
     Transform ironBlock;
     Transform homeBlock;
+
+    Transform player;
 
     private void Start()
     {
@@ -19,6 +21,7 @@ public class MapLoader : MonoBehaviour
         block = Resources.Load<Transform>("Prefabs/block");
         ironBlock = Resources.Load<Transform>("Prefabs/ironBlock");
         homeBlock = Resources.Load<Transform>("Prefabs/homeBlock");
+        player = Resources.Load<Transform>("Prefabs/player");
     }
 
     private void LoadMap()
@@ -46,6 +49,12 @@ public class MapLoader : MonoBehaviour
                 {
                     t = Instantiate(homeBlock, new Vector3(j - 4.5f, 5.5f - (i + 1), 0), homeBlock.rotation) as Transform;
                 }
+                else if (map_str[i][j] == 'p')
+                {
+                    t = Instantiate(player, new Vector3(j - 4.5f, 5.5f - (i + 1), 0), player.rotation) as Transform;
+                }
+                if (t != null)
+                    t.parent = transform;
             }
         }
     }
